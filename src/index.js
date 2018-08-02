@@ -1,4 +1,7 @@
-function EC() {
+import initEc from './init.js';
 
+function Ec(cb) {
+	this.init(cb);
 }
-export default EC;
+initEc();
+export default Ec;
