@@ -1,7 +1,11 @@
 import timeStr from './common/getTime.js';
+import {
+	initGetDomTarget,
+	createTargetStr
+} from './getDomTarget.js';
 
-function initEc(Ec) { //初始化这个类
-	Ec.prototype.init = (cb) => {
+export function initEc(Ec) { //初始化这个类
+	Ec.prototype.init = function(cb) {
 		this.ecData = {
 			errorMesg: '', //错误信息
 			errorTip: '', //针对错误信息，做出的人性化提示
@@ -12,25 +16,32 @@ function initEc(Ec) { //初始化这个类
 
 			},
 			errorTime: '', //发生错误的事件
-			userLocation: '' //发生错误所处地点
+			userLocation: '', //发生错误所处地点
+			domTarget: '' //触发错误的dom元素
 		}
 		this.cb = cb;
-		bindEvent(ec);
+		bindGlobalErrorEvent.call(this);
+		initGetDomTarget.call(this);
 	}
 }
 
-function bindEvent(ec) { //给window绑定错误事件处理程序
-	window.onerror = (errorMesg, errorUrl, errorLine, errorColum, other) => { //如果页面触发了错误
+function bindGlobalErrorEvent() { //给window绑定错误事件处理程序
+	window.addEventListener('error', (e) => { //如果页面触发了错误
+		e = e || window.event;
 		//获取这些错误信息
-		ec.ecData.errorMesg = errorMesg;
-		ec.ecData.errorFile = errorFile;
-		ec.ecData.errorLine = errorLine;
-		ec.ecData.errorColum = errorColum;
-		ec.ecData.errorTime = timeStr;
-
-		//执行初始化时用户传入的回调函数，在该函数中执行对错误信息的上报操作
-		this.cb();
-	}
+		this.ecData.errorMesg = e.message;
+		this.ecData.errorFile = e.filename;
+		this.ecData.errorLine = e.lineno;
+		this.ecData.errorColum = e.colno;
+		this.ecData.errorTime = timeStr;
+		setTimeout(() => {
+			if (this.target) { //如果ec实例有错误触发目标，那么生成对应的dom字符串，供传给后台保存，以便清晰记录准确定位
+				this.ecData.domTarget = createTargetStr.call(this);
+			}
+			//执行初始化时用户传入的回调函数，在该函数中执行对错误信息的上报操作
+			this.cb(this.ecData);
+		}, 0)
+	}, false);
 }
 
 export default {

@@ -2,7 +2,7 @@ import resolve from 'rollup-plugin-node-resolve';
 import {
 	uglify
 } from 'rollup-plugin-uglify';
-import cjs from 'rollup-plugin-commonjs';
+// import cjs from 'rollup-plugin-commonjs';
 import babel from 'rollup-plugin-babel';
 import timeStr from './src/common/getTime.js';
 export default {
@@ -17,11 +17,11 @@ export default {
 		banner: `
 /**诺诺金服前端团队
  *创建于${timeStr}
+ * Released under the MIT License.
 */`
 	},
 	plugins: [
 		resolve(),
-		cjs(),
 		babel({
 			exclude: 'node_modules/**' // 不编译node_modules中的代码
 		}),
