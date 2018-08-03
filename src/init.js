@@ -1,5 +1,9 @@
 import timeStr from './common/getTime.js';
 import {
+	addEvent,
+	getEventObj
+} from './common/event.js';
+import {
 	initGetDomTarget,
 	createTargetStr
 } from './getDomTarget.js';
@@ -26,8 +30,8 @@ export function initEc(Ec) { //初始化这个类
 }
 
 function bindGlobalErrorEvent() { //给window绑定错误事件处理程序
-	window.addEventListener('error', (e) => { //如果页面触发了错误
-		e = e || window.event;
+	addEvent(window, 'error', (e) => { //如果页面触发了错误
+		e = getEventObj(e);
 		//获取这些错误信息
 		this.ecData.errorMesg = e.message;
 		this.ecData.errorFile = e.filename;
@@ -41,7 +45,7 @@ function bindGlobalErrorEvent() { //给window绑定错误事件处理程序
 			//执行初始化时用户传入的回调函数，在该函数中执行对错误信息的上报操作
 			this.cb(this.ecData);
 		}, 0)
-	}, false);
+	})
 }
 
 export default {

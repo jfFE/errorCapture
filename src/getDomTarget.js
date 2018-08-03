@@ -1,3 +1,7 @@
+import {
+    addEvent,
+    getEventObj
+} from './common/event.js';
 export function initGetDomTarget() { //初始化获取触发错误的dom元素
     this.target = null;
     this.triggerStartTime = 0;
@@ -8,13 +12,13 @@ export function initGetDomTarget() { //初始化获取触发错误的dom元素
 }
 
 function bindEvent() {
-    window.addEventListener('click', (e) => {
-        e = e || window.event;
+    addEvent(window, 'click', (e) => {
+        e = getEventObj(e);
         this.target = e.target || e.srcElement;
         this.targetId = e.target.id;
         this.targetClass = e.target.className;
         this.triggerEndTime = new Date().getTime();
-    }, false)
+    })
 }
 
 export function createTargetStr() { //创建字符串格式的html元素
