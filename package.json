@@ -19,5 +19,9 @@
     "rollup-plugin-commonjs": "^8.0.0",
     "rollup-plugin-node-resolve": "^3.3.0",
     "rollup-plugin-uglify": "^4.0.0"
+  },
+  "dependencies": {
+    "axios": "^0.18.0",
+    "jQuery": "^1.7.4"
   }
 }

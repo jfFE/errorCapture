@@ -7,6 +7,9 @@ import {
 	initGetDomTarget,
 	createTargetStr
 } from './getDomTarget.js';
+// import {
+// 	getLocation
+// } from './getLocation.js';
 
 export function initEc(Ec) { //初始化这个类
 	Ec.prototype.init = function(cb) {
@@ -26,6 +29,7 @@ export function initEc(Ec) { //初始化这个类
 		this.cb = cb;
 		bindGlobalErrorEvent.call(this);
 		initGetDomTarget.call(this);
+		// getLocation.call(this);//初始化获取用户地址方法，但由于较多浏览器不支持（目前只有ie能正常获取定位信息），并且使用html5获取定位会使浏览器弹框提示用户点击允许定位，影响了现有产品业务逻辑，故不使用该功能
 	}
 }
 
