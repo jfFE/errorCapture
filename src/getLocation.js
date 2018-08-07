@@ -3,7 +3,7 @@ export function getLocation() { //html5 API获取经纬度
 		navigator.geolocation.getCurrentPosition(position => {
 			let obj = {
 				location: `${position.coords.longitude},${position.coords.latitude}`,
-				key: 'c2e7468c5e2d9b072bc08bcedbe3caca'
+				key: '####'
 			}
 			transformLaAndLoToAddress.call(this, obj);
 		}, err => { //定位发生错误，不执行任何操作
