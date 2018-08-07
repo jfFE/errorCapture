@@ -13,6 +13,9 @@ import {
 
 export function initEc(Ec) { //初始化这个类
 	Ec.prototype.init = function(cb) {
+		if (cb === undefined || cb === null || typeof cb !== 'function') {
+			return;
+		}
 		this.ecData = {
 			errorMesg: '', //错误信息
 			errorTip: '', //针对错误信息，做出的人性化提示

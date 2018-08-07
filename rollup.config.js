@@ -11,7 +11,7 @@ export default {
 		file: 'dist/ec.min.js',
 		format: 'umd',
 		name: 'Ec', //ErrorCapture
-		sourcemap: false,
+		sourcemap: true,
 		strict: false,
 		env: 'development',
 		banner: `
@@ -24,8 +24,8 @@ export default {
 		babel({
 			exclude: 'node_modules/**' // 不编译node_modules中的代码
 		}),
-		cjs()
-		// uglify()
+		cjs(),
+		uglify()
 	],
 	watch: {
 		chokidar: true,
