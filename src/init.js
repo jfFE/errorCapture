@@ -21,7 +21,7 @@ export function initEc(Ec) { //初始化这个类
 		}
 		this.ecData = {
 			errorMesg: '', //错误信息
-			errorTip: '', //针对错误信息，做出的人性化提示
+			errorTip: '', //错误信息类型
 			errorFile: '', //错误文件路径名称
 			errorLine: '', //错误代码行
 			errorColum: '', //错误代码列
@@ -43,6 +43,7 @@ function bindGlobalErrorEvent() { //给window绑定错误事件处理程序
 		e = getEventObj(e);
 		//获取这些错误信息
 		this.ecData.errorMesg = e.message;
+		this.ecData.errorTip = 'js运行错误';
 		this.ecData.errorFile = e.filename;
 		this.ecData.errorLine = e.lineno;
 		this.ecData.errorColum = e.colno;
@@ -74,6 +75,7 @@ function listenGlobalAjax() { //监听全局ajax
 			}
 		}
 		if (isNeedSubmit) {
+			this.ecData.errorTip = 'ajax错误';
 			this.ecData.errorFile = location.href; //上报当前所在位置
 			this.ecData.errorTime = new Date();
 			setTimeout(() => {

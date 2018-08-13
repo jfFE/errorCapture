@@ -21,10 +21,9 @@ new Ec(function(errData){
     console.log(errData)
 })
 
-/*
 {
     errorMesg: '', //错误信息
-    errorTip: '', //针对错误信息，做出的人性化提示
+    errorTip: '', //错误类型
     errorFile: '', //错误文件路径名称
     errorLine: '', //错误代码行
     errorColum: '', //错误代码列
@@ -34,5 +33,4 @@ new Ec(function(errData){
     userLocation: '', //发生错误所处地点
     domTarget: '' //触发错误的dom元素
 }
-*/
 ```
