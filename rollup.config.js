@@ -11,7 +11,7 @@ export default {
 		file: 'dist/ec.min.js',
 		format: 'umd',
 		name: 'Ec', //ErrorCapture
-		sourcemap: true,
+		sourcemap: false,
 		strict: false,
 		env: 'development',
 		banner: `
